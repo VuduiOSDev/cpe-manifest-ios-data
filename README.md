@@ -50,23 +50,22 @@ Use the static `load` functions in `CPEXMLSuite` for a convenient way to initial
 
 ### Providing `URL` objects
 ```swift
-CPEXMLSuite.load(manifestXMLURL: manifestXMLURL, appDataXMLURL: appDataXMLURL, cpeStyleXMLURL: cpeStyleXMLURL) { (error) in
-    if let error = error {
-        // Respond to error case
-    } else {
-        // Respond to parsing completion event (ExperienceLauncher.launch)
+do {
+    try CPEXMLSuite.load(manifestXMLURL: manifestXMLURL, appDataXMLURL: appDataXMLURL, cpeStyleXMLURL: cpeStyleXMLURL) {
+        // Respond to parsing completion event
     }
+} catch {
+    // Respond to error case
 }
 ```
 
 ### Providing `Data` objects
 ```swift
-CPEXMLSuite.load(manifestXMLData: manifestXMLData, appDataXMLData: appDataXMLData, cpeStyleXMLData: cpeStyleXMLData) { (error) in
-    if let error = error {
-        // Respond to error case
-    } else {
-        // Respond to parsing completion event (ExperienceLauncher.launch)
-    }
+do {
+    try CPEXMLSuite.load(manifestXMLData: manifestXMLData, appDataXMLData: appDataXMLData, cpeStyleXMLData: cpeStyleXMLData) {
+        // Respond to parsing completion event
+} catch {
+    // Respond to error case
 }
 ```
 
