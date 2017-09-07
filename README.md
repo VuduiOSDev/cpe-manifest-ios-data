@@ -35,29 +35,38 @@ Then, run the following command:
 $ pod install
 ```
 
+### Carthage
+[Carthage](https://github.com/Carthage/Carthage) is a decentralized dependency manager for Cocoa applications.
+To integrate CPEData into your Xcode project using Carthage, specify it in your `Cartfile`:
+
+```
+github "warnerbros/cpe-manifest-ios-data" ~> 3.0
+```
+Then, add `CPEData.framework` and `SWXMLHash.framework` to "Linked Frameworks and Libraries" and Carthage's "copy-frameworks" script 
+
 ## Usage
 
 Use the static `load` functions in `CPEXMLSuite` for a convenient way to initialize and parse all the supported spec files.
 
 ### Providing `URL` objects
 ```swift
-do {
-    try CPEXMLSuite.load(manifestXMLURL: manifestXMLURL, appDataXMLURL: appDataXMLURL, cpeStyleXMLURL: cpeStyleXMLURL) {
-        // Respond to parsing completion event
+CPEXMLSuite.load(manifestXMLURL: manifestXMLURL, appDataXMLURL: appDataXMLURL, cpeStyleXMLURL: cpeStyleXMLURL) { (error) in
+    if let error = error {
+        // Respond to error case
+    } else {
+        // Respond to parsing completion event (ExperienceLauncher.launch)
     }
-} catch {
-    // Respond to error case
 }
 ```
 
 ### Providing `Data` objects
 ```swift
-do {
-    try CPEXMLSuite.load(manifestXMLData: manifestXMLData, appDataXMLData: appDataXMLData, cpeStyleXMLData: cpeStyleXMLData) {
-        // Respond to parsing completion event
+CPEXMLSuite.load(manifestXMLData: manifestXMLData, appDataXMLData: appDataXMLData, cpeStyleXMLData: cpeStyleXMLData) { (error) in
+    if let error = error {
+        // Respond to error case
+    } else {
+        // Respond to parsing completion event (ExperienceLauncher.launch)
     }
-} catch {
-    // Respond to error case
 }
 ```
 
