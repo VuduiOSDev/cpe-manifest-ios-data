@@ -64,6 +64,7 @@ do {
 do {
     try CPEXMLSuite.load(manifestXMLData: manifestXMLData, appDataXMLData: appDataXMLData, cpeStyleXMLData: cpeStyleXMLData) {
         // Respond to parsing completion event
+    }
 } catch {
     // Respond to error case
 }
