@@ -20,7 +20,7 @@ public class AppGroup: MetadataDriven, Trackable {
     public var interactiveTrackIDs: [String]
 
     open lazy var interactives: [Interactive]? = { [unowned self] in
-        return self.interactiveTrackIDs.flatMap({ CPEXMLSuite.current?.manifest.interactiveWithID($0) })
+        return self.interactiveTrackIDs.compactMap({ CPEXMLSuite.current?.manifest.interactiveWithID($0) })
     }()
 
     open var url: URL? {

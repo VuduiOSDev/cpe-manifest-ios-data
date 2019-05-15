@@ -27,7 +27,7 @@ public class TheTakeProductCategory: ProductCategory {
         self.name = name
 
         if let childCategories = data[Keys.ChildCategories] as? [NSDictionary] {
-            self.childCategories = childCategories.flatMap({ return TheTakeProductCategory(data: $0) })
+            self.childCategories = childCategories.compactMap({ return TheTakeProductCategory(data: $0) })
         }
     }
 
@@ -129,7 +129,7 @@ public class TheTakeProduct: ProductItem {
             hasExactMatchData = true
         }
 
-        if let purchaseLink = data[Constants.Keys.PurchaseLink] as? String, purchaseLink.characters.count > 0 {
+        if let purchaseLink = data[Constants.Keys.PurchaseLink] as? String, purchaseLink.count > 0 {
             externalURL = URL(string: purchaseLink)
         } else {
             externalURL = URL(string: Constants.ProductURLPrefix + id)

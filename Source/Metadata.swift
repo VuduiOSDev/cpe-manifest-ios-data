@@ -152,7 +152,7 @@ open class LocalizedInfo {
 
         // ArtReference
         if indexer.hasElement(Elements.ArtReference) {
-            artReferences = try indexer[Elements.ArtReference].all.flatMap({ try ArtReference(indexer: $0) })
+            artReferences = try indexer[Elements.ArtReference].all.compactMap({ try ArtReference(indexer: $0) })
         }
 
         // Summary190
@@ -266,14 +266,14 @@ open class Metadata {
             throw ManifestError.missingRequiredChildElement(name: Elements.LocalizedInfo, element: metadataIndexer.element)
         }
 
-        localizedInfos = try metadataIndexer[Elements.LocalizedInfo].all.flatMap({ try LocalizedInfo(indexer: $0) })
+        localizedInfos = try metadataIndexer[Elements.LocalizedInfo].all.compactMap({ try LocalizedInfo(indexer: $0) })
 
         // AltIdentifier
         contentIdentifiers = try metadataIndexer[Elements.AltIdentifier].value()
 
         // People
         if metadataIndexer.hasElement(Elements.People) {
-            people = try metadataIndexer[Elements.People].all.flatMap({ try Person(indexer: $0) }).sorted(by: { (person1, person2) -> Bool in
+            people = try metadataIndexer[Elements.People].all.compactMap({ try Person(indexer: $0) }).sorted(by: { (person1, person2) -> Bool in
                 return person1.billingBlockOrder < person2.billingBlockOrder
             })
         }
